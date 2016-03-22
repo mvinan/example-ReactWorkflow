@@ -19,6 +19,9 @@ var map          = require('vinyl-map');
 //Gulp injected
 var inject       = require('gulp-inject');
 
+//Gulp json serve TMP
+var jsonServer = require('json-server');
+
 
 var src = {
     sass: './src/importer.sass',
@@ -65,14 +68,13 @@ gulp.task('bundle', function () {
 /**
  * First bundle, then serve from the ./public directory
  */
-gulp.task('default', ['bundle', 'inject', 'styles'], function () {
+gulp.task('default', ['bundle', 'inject', 'styles', 'serve:api'], function () {
     browserSync.init({
         server: "./public"
     });
 
     //watch sass files
-    gulp.watch([src.sass], ['styles']);
-    gulp.watch([src.sassAll], ['inject']);
+    gulp.watch([src.sassAll, src.sass], ['inject', 'styles']);
     gulp.watch(src.html).on('change', reload);
 });
 
@@ -118,4 +120,18 @@ gulp.task('inject', function () {
   return target.pipe(inject(sources, {relative: true, empty: true}))
     .pipe(gulp.dest('src'))
     .pipe(reload({stream: true}))
+});
+
+//Json server
+// API (database) Server
+
+var apiServer = jsonServer.create();
+apiServer.use(jsonServer.defaults());
+
+var router = jsonServer.router('db.json');
+apiServer.use(router);
+
+gulp.task('serve:api', function (cb) {
+  apiServer.listen(3000);
+  cb();
 });
