@@ -8,6 +8,8 @@ import Layout from './ui/layouts/app'
 import Home from './ui/home';
 import Users from './ui/user';
 import Patients from './ui/patients';
+import WidgetContainer from './ui/widget-container';
+import UsersContainer from './ui/users-container';
 
 class App extends React.Component{
   render(){
@@ -25,8 +27,8 @@ class RoutingViews extends React.Component{
       <Router history={browserHistory}>
         <Route component={Layout}>
           <Route path="/" component={Home} />
-          <Route path="/users" component={Users} />
-          <Route path="/patient" component={Patients} />
+          <Route path="/widgets" component={WidgetContainer} />
+          <Route path="/users" component={UsersContainer} />
         </Route>
       </Router>
     )

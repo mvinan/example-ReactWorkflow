@@ -1,15 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router';
+import AsideContainer from '../aside-container';
+
 
 export default class Layout extends React.Component{
     render(){
         return (
-            <div className="app">
+            <div className="app container">
                 <nav>
-                    <Link to="/">Home</Link>
+                    <Link to="/">Home</Link><br />
+                    <Link to="/widgets">Widgets</Link><br />
                     <Link to="/users">Users</Link>
-                    <Link to="/patient">Patients</Link>
                 </nav>
+                <AsideContainer/>
                 <main>
                     {this.props.children}
                 </main>

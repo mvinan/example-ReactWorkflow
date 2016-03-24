@@ -68,7 +68,7 @@ gulp.task('bundle', function () {
 /**
  * First bundle, then serve from the ./public directory
  */
-gulp.task('default', ['bundle', 'inject', 'styles', 'serve:api'], function () {
+gulp.task('default', ['bundle', 'inject', 'styles'], function () {
     browserSync.init({
         server: "./public"
     });
@@ -125,13 +125,16 @@ gulp.task('inject', function () {
 //Json server
 // API (database) Server
 
-var apiServer = jsonServer.create();
-apiServer.use(jsonServer.defaults());
-
-var router = jsonServer.router('db.json');
-apiServer.use(router);
-
-gulp.task('serve:api', function (cb) {
-  apiServer.listen(3000);
-  cb();
-});
+/*
+* var apiServer = jsonServer.create();
+* apiServer.use(jsonServer.defaults());
+*
+* var router = jsonServer.router('./db.json');
+* apiServer.use(router);
+*
+* gulp.task('serve:api', function (cb) {
+*   apiServer.listen(4000);
+*   cb();
+* });
+*
+*/

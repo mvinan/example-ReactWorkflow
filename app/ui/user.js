@@ -3,7 +3,12 @@ import React from 'react';
 export default class User extends React.Component{
     render() {
         return (
-            <h1>App: User</h1>
+            <div>
+              <h1>App: Users</h1>
+              {this.props.users.map((user, i)=>{
+                return <li key={user.id}>{user.name}</li>
+              })}
+            </div>
         )
     }
 }
